@@ -123,8 +123,9 @@ def main():
     """
     main program function
     """
-    num_rows_to_create = 1000000
-    weather_station_names = []
+
+    check_args(sys.argv)
+    num_rows_to_create = int(sys.argv[1])
     weather_station_names = build_weather_station_name_list()
     print(estimate_file_size(weather_station_names, num_rows_to_create))
     build_test_data(weather_station_names, num_rows_to_create)
