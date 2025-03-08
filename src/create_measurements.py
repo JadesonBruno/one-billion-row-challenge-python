@@ -60,7 +60,7 @@ def estimate_file_size(weather_station_names, temperatures, num_rows_to_create):
     total_file_size = num_rows_to_create * (weather_station_names_lengh + temperatures_lengh)
     human_file_size = convert_bytes(total_file_size)
 
-    return f"O tamanho estimado do arquivo é:  {human_file_size}.\nO tamanho final será provavelmente muito menor (metade)."
+    return f"O tamanho estimado do arquivo é:  {human_file_size}.\nO tamanho vai variar pois o cálculo se baseou na média dos valores únicos."
 
 # Generates and writes to file the requested length of test data
 def build_test_data(weather_station_names, num_rows_to_create):
