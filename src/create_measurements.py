@@ -8,15 +8,10 @@ def check_args(file_args):
     """
     Sanity checks out input and prints out usage if input is not a positive integer
     """
-    try:
-        if len(file_args) != 2 or int(file_args[1]) <= 0:
-            raise Exception()
-    except:
-        print("Usage:  create_measurements.sh <positive integer number of records to create>")
-        print("        You can use underscore notation for large number of records.")
-        print("        For example:  1_000_000_000 for one billion")
-        exit()
-
+    if len(file_args) != 2 or int(file_args[1]) <= 0:
+        raise Exception("""Usage:  create_measurements.sh <positive integer number of records to create>
+                                   You can use underscore notation for large number of records.
+                                   For example:  1_000_000_000 for one billion""")
 
 def build_weather_station_name_list():
     """
@@ -134,4 +129,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-exit()
