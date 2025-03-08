@@ -12,9 +12,10 @@ def check_args(file_args):
                                    For example:  1_000_000_000 for one billion""")
 
 # Grabs the weather station names from example data provided in repo and dedups
-def build_weather_station_name_list():
+def build_weather_station_name_list_and_temperature_list():
 
     station_names = []
+    temperatures = []
     with open("./data/weather_stations.csv", "r", encoding="utf-8") as file:
         file_contents = file.read()
     for station in file_contents.splitlines():
@@ -22,7 +23,8 @@ def build_weather_station_name_list():
             continue
         else:
             station_names.append(station.split(';')[0])
-    return list(set(station_names))
+            temperatures.append(station.split(';')[1])
+    return list(set(station_names)), list(set(temperatures))
 
 # Convert bytes to a human-readable format (e.g., KiB, MiB, GiB)
 def convert_bytes(num):
@@ -50,21 +52,12 @@ def format_elapsed_time(seconds):
 
 
 #  Tries to estimate how large a file the test data will be
-def estimate_file_size(weather_station_names, num_rows_to_create):
+def estimate_file_size(weather_station_names, temperatures, num_rows_to_create):
 
-    max_string = float('-inf')
-    min_string = float('inf')
-    per_record_size = 0
-    record_size_unit = "bytes"
+    weather_station_names_lengh = sum(len(station) for station in weather_station_names) / len(weather_station_names)
+    temperatures_lengh = sum(len(temperature) for temperature in temperatures) / len(temperatures)
 
-    for station in weather_station_names:
-        if len(station) > max_string:
-            max_string = len(station)
-        if len(station) < min_string:
-            min_string = len(station)
-        per_record_size = ((max_string + min_string * 2) + len(",-123.4")) / 2
-
-    total_file_size = num_rows_to_create * per_record_size
+    total_file_size = num_rows_to_create * (weather_station_names_lengh + temperatures_lengh)
     human_file_size = convert_bytes(total_file_size)
 
     return f"O tamanho estimado do arquivo é:  {human_file_size}.\nO tamanho final será provavelmente muito menor (metade)."
@@ -108,8 +101,8 @@ def main():
 
     check_args(sys.argv)
     num_rows_to_create = int(sys.argv[1])
-    weather_station_names = build_weather_station_name_list()
-    print(estimate_file_size(weather_station_names, num_rows_to_create))
+    weather_station_names, temperatures = build_weather_station_name_list_and_temperature_list()
+    print(estimate_file_size(weather_station_names, temperatures, num_rows_to_create))
     build_test_data(weather_station_names, num_rows_to_create)
     print("Arquivo de teste finalizado.")
 
