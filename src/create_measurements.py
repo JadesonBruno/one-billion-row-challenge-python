@@ -71,7 +71,7 @@ def build_test_data(weather_station_names: List[str], temperatures: List[str], n
     station_names_10k_max: List[str] = random.choices(weather_station_names, k=10_000)
     batch_size: int = 10000 # instead of writing line by line to file, process a batch of stations and put it to disk
     progress_step: int = max(1, (num_rows_to_create // batch_size) // 100)
-    print("Criando o arquivo... Para um bilhão demora uns 7 min, para 1 milhão menos de 1 seg...")
+    print("Criando o arquivo... Para um bilhão demora =~ uns 15 min, para 1 milhão menos de 3 seg...")
 
     try:
         with open("./data/measurements.txt", 'w', encoding="utf-8") as file:
