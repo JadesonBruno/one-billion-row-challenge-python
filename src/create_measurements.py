@@ -2,6 +2,7 @@ import os
 import sys
 import random
 import time
+from tqdm import tqdm  # importa o tqdm para barra de progresso
 from typing import List, Tuple
 
 # Sanity checks out input and prints out usage if input is not a positive integer
@@ -74,8 +75,7 @@ def build_test_data(weather_station_names: List[str], temperatures: List[str], n
 
     try:
         with open("./data/measurements.txt", 'w', encoding="utf-8") as file:
-            for _ in range(0,num_rows_to_create // batch_size):
-                
+            for _ in tqdm(range(0, num_rows_to_create // batch_size), desc="Processando"):
                 batch: List[str] = random.choices(station_names_10k_max, k=batch_size)
                 prepped_deviated_batch: str = '\n'.join([f"{station};{random.choice(temperatures)}" for station in batch])
                 file.write(prepped_deviated_batch + '\n')
