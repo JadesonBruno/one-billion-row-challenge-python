@@ -10,7 +10,7 @@ CONCURRENCY: int = cpu_count()
 
 total_linhas: int = 1_000_000_000  # Total de linhas conhecido
 chunksize: int = 100_000_000  # Define o tamanho do chunk
-filename: Path = "data/measurements.txt"  # Certifique-se de que este é o caminho correto para o arquivo
+filename: Path = Path("data/measurements.txt")  # Certifique-se de que este é o caminho correto para o arquivo
 
 def process_chunk(chunk: pd.DataFrame) -> pd.DataFrame:
     # Agrega os dados dentro do chunk usando Pandas

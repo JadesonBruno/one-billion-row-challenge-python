@@ -46,7 +46,7 @@ def processar_temperaturas(path_do_csv: Path) -> Dict[str, str]:
 
 
 if __name__ == "__main__":
-    path_do_csv = "data/measurements.txt"
+    path_do_csv: Path = Path("data/measurements.txt")
 
     print("Iniciando o processamento do arquivo.")
     start_time: int = time.time()  # Tempo de início
