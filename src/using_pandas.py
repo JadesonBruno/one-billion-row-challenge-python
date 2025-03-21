@@ -8,7 +8,8 @@ import pandas as pd
 from tqdm import tqdm  # importa o tqdm para barra de progresso
 
 CONCURRENCY: int = cpu_count()
-total_linhas: int = 1_000_000_000  # Total de linhas conhecido
+frase_input = "Digite o número total de linhas processadas: "
+total_linhas: int = int(input(frase_input))  # Total de linhas conhecido
 chunksize: int = 100_000_000  # Define o tamanho do chunk
 # Certifique-se de que este é o caminho correto para o arquivo
 filename: Path = Path("data/measurements.txt")
